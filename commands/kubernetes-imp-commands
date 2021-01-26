@@ -1,0 +1,45 @@
+TO list all the api-resources:
+> kubectl api-resources
+
+
+kubectl api-resources resource-name
+
+To get the fields of resource in yaml:
+
+> kubectl explain resource-name[.field] (docs)
+eg: kubectl explain pods.spec
+
+kubectl create deploy --image=httpd my-deploy -o yaml > deploy.yml
+
+[Connect Api using Curl]
+
+kube proxy --port=PORT_NUMBER  &
+
+curl http://localhost:PORT_NUMBER/api/API_VERSION/namespaces/NAME_SPACE/RESOURCE_NAME/PARTICULAR_RESOURCE
+
+
+
+-X DELETE
+
+-X GET
+
+
+
+bash-completion tool is useful.
+
+
+How to set?
+
+1. Install bash-completion.
+2. RUN kubectl completion bash and redirect the output to /etc/bash_completion.d/kubectl (if make changes for all users)
+For single user:
+	kubectl completion bash >> ~/.bashrc
+
+
+maxSurge: means the minimum number of pods to be avialable until the rollout is being done.(number of pods extra should be available during the rollout)
+if maxSurge is 2
+and replica is 3
+then 5 pods can be available during the rollout.
+maxUnavailable: means  the maximum those of the pods can be unavailable out of desired.(number of pods less than desired can be present at time of rollout)
+
+- kubectl cordon node hostname  [ used to make the node unschedulable ] opposite [uncordon]

@@ -1,0 +1,24 @@
+apiVersion: v1 # the api Version in which we have the resource.
+kind: Pod
+metadata:
+  name: my-pod-local-storage1
+  labels:
+    app: app-store
+    env: dev
+
+spec: # specifications of the pod
+  volumes: # the volumes to use 
+  - name: mydata   # name of the device 
+    emptyDir: {} # a special type which creates an empty temp dir
+
+  containers:
+  - name: my-con-local-store
+    image: busybox
+    command: ["sleep","3600"]
+    volumeMounts: # volume to mount to device 
+    - name: mydata # name should be same as the volume Name.
+      mountPath: /root/      # similar to `mount dev   mountPath`
+  
+
+
+

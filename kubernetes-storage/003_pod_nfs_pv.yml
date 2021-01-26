@@ -1,0 +1,19 @@
+apiVersion: v1 # the api version in which this resource is present.
+kind: Pod
+metadata:
+  name: my-pod-nfs-pv
+  labels:
+    app: web
+    env: dev
+spec: # the specifications of the pod
+  # information about the storage/volume
+  volumes:
+  - name: my-nfs-vol # volume name to refer in the container decalartion
+    persistentVolumeClaim: # from where to get the volume.
+      claimName: pvc-nfs-pv      # shoudl be exactly same as the pvc name 
+  containers:
+  - name: my-web-nfs
+    image: httpd # the httpd image is used to launch the container with web service enabled.
+    volumeMounts: # exactly equal to `mount dev mountPath`
+    - name: my-nfs-vol   # should be equal to one of the name value defined in volumes list.
+      mountPath: /usr/local/apache2/htdocs/  # root directory of apache httpd in this image. 

@@ -1,0 +1,19 @@
+apiVersion: v1 # the api version in the resource is present.
+kind: ConfigMap # the type of resource we are using
+metadata: 
+  name: my-config-map
+  labels:
+    env: dev
+    storageType: ConfigMap 
+
+data:
+  httpd.conf: |
+          Listen 8080
+         
+    
+          
+      # the data can have file or the variables. for files user pipe(|) symbol.
+
+
+# from cmd-line we can create from-literals=key=value or from-file=file-path.
+ 

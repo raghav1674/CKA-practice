@@ -1,0 +1,27 @@
+# DAEMONSET: daemonSet are the containers/pod which we want to run in all nodes when some new node comes in clsuter that pod should run automatically in that node.
+
+apiVersion: apps/v1 # api version
+kind: DaemonSet # type of resource
+metadata:
+  name: nginx-everywhere
+  labels: 
+    app: nginx-daemon-every
+spec: # specifications of the DaemonSet
+  selector:
+    matchLabels: # selector withe nginx-every
+      app: nginx-every
+  template: # template used for the nginx-every pod
+    metadata:
+      name: nginx-pod
+      labels:
+        app: nginx-every
+    spec: # specifications of the pod
+    ## tolerations should be declared at the pod spec level.
+      tolerations: # set the tolerations based on node type where to have that service where to not.
+      - key: node-role.kubernetes.io/master
+        effect: NoSchedule # in this case it will run on the master also.
+
+      containers:
+      - name: nginx-con
+        image: nginx
+

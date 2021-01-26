@@ -1,0 +1,23 @@
+# initContainers are declaredat the containers level of the pod and in this there are 2 containers inside one podand after the initContainer has done its work the main app container will run.
+
+apiVersion: v1 # the api version in which pod resource is present.
+kind: Pod # type of the resource.
+metadata:
+  name: my-init-con-pod
+  labels:
+    app: demo-init-con
+    env: dev
+spec: # specifications of the pod
+  containers: # container config
+  - name: my-main-web-con
+    image: httpd
+    ports:
+    - containerPort: 80
+
+  initContainers:  # firstly this container will run for 10sec then the main web container will be launched
+  - name: sleep-con
+    image: busybox
+    command:
+    - "sleep"
+    - "10"
+

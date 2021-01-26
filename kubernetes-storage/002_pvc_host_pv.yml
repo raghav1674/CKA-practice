@@ -1,0 +1,17 @@
+apiVersion: v1 # apiVersion in which this resource resides.
+kind: PersistentVolumeClaim #(PVC) type of resource
+metadata:
+  name: my-host-pvc
+  labels:
+    env: dev
+    storageType: hostPath 
+
+spec: # specification of the resource(PVC)
+  # the accessMode of storage(pv) from which claim to be taken
+  accessModes: 
+  - ReadWriteOnce
+  resources: # what more features like capacity
+    requests:
+      storage: 1Gi
+
+

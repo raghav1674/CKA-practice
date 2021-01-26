@@ -1,0 +1,23 @@
+apiVersion: v1 # the api in which resource is present.
+kind: PersistentVolume # type of the resource to be created.
+metadata:
+  name: my-nfs-pv
+  labels:
+    storageType: nfs-pv
+    env: dev
+spec: # specifications of the resource(pv)
+  # capacity
+  capacity:
+    storage: 200Mi # 200MiB
+  # accessMode
+  accessModes:
+  - ReadWriteMany
+
+  # type of storage is nfs
+  nfs:
+    path: /nfs_dir # the path of the dir that is exported
+    server: 192.168.99.109 # ip of the nfs server
+
+
+
+

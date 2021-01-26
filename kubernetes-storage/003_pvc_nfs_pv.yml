@@ -1,0 +1,16 @@
+apiVersion: v1 # the api Version in which the resource is present.
+kind: PersistentVolumeClaim
+metadata: 
+  name: pvc-nfs-pv
+  labels:
+    storageType: nfs # pvc not dependent on the storageType of pv
+    env: dev
+spec: # the specifications of the resource(pvc)
+  # the accessMode 
+  accessModes:
+  - ReadWriteMany
+  # resource info like storage
+  resources:
+    requests:
+      storage: 100Mi 
+

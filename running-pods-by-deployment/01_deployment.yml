@@ -1,0 +1,36 @@
+# DEPLOYMENT: REPLICASET + ROLLOUT STATERGIES.
+
+apiVersion: apps/v1 # the api version in which deployment resource is present.
+
+kind: Deployment # type of resource
+
+metadata: 
+  name: my-deploy
+  labels:
+    name: my-deploy
+    env: practice
+
+spec:
+  selector:
+    matchLabels: # as it creates the replicaset
+      app: web
+      loc: IN
+      env: dev
+
+  strategy:     #  RollOut Startegy Config.
+    type: RollingUpdate # if type is rollingUpdate we can set maxSurge:(maximum redunant) and maxUnavailable
+    rollingUpdate:
+      maxSurge: 1
+
+  template: # the template of the pod to be managed and moitored.
+    metadata: 
+      name: my-pod
+      labels:
+        app: web
+        env: dev
+        loc: IN
+    spec: # specifications of the pod
+      containers:
+      - name: my-con
+        image: nginx
+

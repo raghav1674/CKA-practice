@@ -1,0 +1,22 @@
+apiVersion: v1 # the apiVersion
+
+kind: Pod # the resource type
+
+metadata: 
+  name: pod-host-pv 
+  labels:
+    storageType: host-pv
+    env: dev
+
+spec: # specifications of the Resource(Pod)
+  volumes:
+  - name: my-host-vol # name of the dev which we can refer in yml.
+    persistentVolumeClaim: # the storage is claimed from pv and the pv which satisfies the pvc requirements get mounted to pod.
+      claimName: my-host-pvc
+  containers:
+  - name: my-con-host-pv
+    image: httpd
+    volumeMounts: # similar to mount dev mountPath
+    - name: my-host-vol # name similar to names value in volumes.
+      mountPath: /root/
+

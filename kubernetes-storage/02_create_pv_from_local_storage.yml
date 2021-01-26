@@ -1,0 +1,18 @@
+apiVersion: v1 # api Version in which we have this resource
+kind: PersistentVolume # kind of the resource
+metadata:
+  name: my-local-pv
+  labels:
+    env: test
+    type: local
+spec: # specification of the resource
+  capacity: # storage capacity
+    storage: 1Gi
+  accessModes: # accessMode of that volume
+  - ReadWriteOnce
+  hostPath: #type of pv is hostPath means getting the storage from the host 
+    path: /tmp-pod/ # this is the host dir path to be mounted.
+    
+
+
+
